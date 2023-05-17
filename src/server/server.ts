@@ -1,6 +1,7 @@
 import express from "express";
 import { PORT, HOST, SERVER_URL } from "./config";
 import apiRouter from "./api-router";
+import serverRender from "./render";
 const server = express();
 
 server.use(express.static("dist"));
@@ -9,9 +10,11 @@ server.set("view engine", "ejs");
 
 server.use("/api", apiRouter);
 
-server.use("/", (req, res) => {
+server.use("/", async (req, res) => {
+  const { initialHTML, initialData } = await serverRender();
   res.render("index", {
-    initialContent: "Loading....",
+    initialHTML,
+    initialData,
   });
 });
 
