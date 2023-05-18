@@ -5,6 +5,7 @@ import serverRender from "./render";
 const server = express();
 
 server.use(express.static("dist"));
+server.use(express.json());
 
 server.set("view engine", "ejs");
 

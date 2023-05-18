@@ -12,3 +12,14 @@ export const fetchContest = async (contextId) => {
   );
   return result.data.contest;
 };
+
+export const addNewNameToContest = async (
+  contestId,
+  newNameValue,
+) => {
+  const result = await axios.post(
+    `${API_SERVER_URL}/contest/${contestId}`,
+    { newNameValue },
+  );
+  return result.data.updatedContest;
+};
